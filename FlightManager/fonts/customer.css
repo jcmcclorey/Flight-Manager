@@ -1,0 +1,24 @@
+﻿thead{
+    text-align: center;
+    font-size: 10px;
+}
+
+tr{
+    font-size: 10px;
+}
+
+body{
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+td{
+    width: 120px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+}
+
+.headtext{
+    font-weight: bold;
+    text-decoration: underline;
+}

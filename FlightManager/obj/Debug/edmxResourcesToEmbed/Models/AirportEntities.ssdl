@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="AirportManagerModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Airports">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="250" Nullable="false" />
+    <Property Name="City" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="State" Type="varchar" MaxLength="30" />
+    <Property Name="Country" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="iata_code" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="icao_code" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="latitude_deg" Type="decimal" Precision="8" Scale="4" Nullable="false" />
+    <Property Name="longitude_deg" Type="decimal" Precision="8" Scale="4" Nullable="false" />
+    <Property Name="elevation_ft" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Customers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="LastName" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Address" Type="varchar" MaxLength="350" Nullable="false" />
+    <Property Name="Country" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="City" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="State" Type="varchar" MaxLength="100" />
+    <Property Name="Zip" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="Phone" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="CurrentCountry" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="CurrentCity" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="CurrentState" Type="varchar" MaxLength="100" />
+    <Property Name="CurrentAirport" Type="varchar" MaxLength="300" Nullable="false" />
+    <Property Name="DestinationCountry" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="DestinationCity" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="DestinationState" Type="varchar" MaxLength="100" />
+    <Property Name="DestinationAirport" Type="varchar" MaxLength="300" Nullable="false" />
+    <Property Name="Distance" Type="decimal" Precision="15" Scale="1" Nullable="false" />
+    <Property Name="Cost" Type="money" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="AirportManagerModelStoreContainer">
+    <EntitySet Name="Airports" EntityType="Self.Airports" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

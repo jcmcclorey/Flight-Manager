@@ -1,0 +1,271 @@
+﻿@model List<FlightManager.Models.Airport>
+<link href="~/fonts/index.css" rel="stylesheet" />
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<h2>Flight Details</h2>
+
+<!--FROM SECTION-->
+<h3>From:</h3>
+<table>
+    <tr>
+        <td>
+            Country:
+        </td>
+        <td>
+            <select data-bind="options: sortedCountries,
+                                optionsText: 'countryName',
+                                optionsValue: 'countryName',
+                                value: selectedCountry,
+                                optionsCaption: 'Choose one...'"></select>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            City:
+        </td>
+        <td>
+            <select data-bind="options: filteredCities,
+                            optionsText: 'cityName',
+                            optionsValue: 'cityName',
+                            value: selectedCity,
+                            optionsCaption: 'Choose one...'"></select>
+        </td>
+    </tr>
+    <tr>
+        <td>State:</td>
+        <td>
+
+            <select data-bind="options: filteredStates,
+                              optionsText: 'stateName',
+                              optionsValue: 'stateName',
+                              value: selectedState,
+                              optionsCaption: 'Choose one...'"></select>
+            <span class="optional">* US only</span>
+        <td>
+    </tr>
+    <tr>
+        <td>Airport:</td>
+        <td>
+            <select data-bind="options: filteredAirports,
+                                optionsText: 'airportName',
+                                optionsValue: 'airportName',
+                                value: selectedAirport,
+                                optionsCaption: 'Choose one...'"></select>
+        </td>
+    </tr>
+</table>
+<!--TO SECTION-->
+<h3>To:</h3>
+<table class="toTable">
+    <tr>
+        <td>
+            Country:
+        </td>
+        <td>
+            <select data-bind="options: sortedCountries2,
+                                optionsText: 'countryName',
+                                optionsValue: 'countryName',
+                                value: selectedCountry2,
+                                optionsCaption: 'Choose one...'"></select>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            City:
+        </td>
+        <td>
+            <select data-bind="options: filteredCities2,
+                            optionsText: 'cityName',
+                            optionsValue: 'cityName',
+                            value: selectedCity2,
+                            optionsCaption: 'Choose one...'"></select>
+        </td>
+    </tr>
+    <tr>
+        <td>State:</td>
+        <td>
+
+            <select data-bind="options: filteredStates2,
+                              optionsText: 'stateName',
+                              optionsValue: 'stateName',
+                              value: selectedState2,
+                              optionsCaption: 'Choose one...'"></select>
+            <span class="optional">* US only</span>
+        <td>
+    </tr>
+    <tr>
+        <td>Airport:</td>
+        <td>
+            <select data-bind="options: filteredAirports2,
+                                optionsText: 'airportName',
+                                optionsValue: 'airportName',
+                                value: selectedAirport2,
+                                optionsCaption: 'Choose one...'"></select>
+        </td>
+    </tr>
+</table>
+<!--DISTANCE AND PRICE-->
+<p><span>Distance: </span><span data-bind="text: distance,
+                                            value: distance,
+                                            visible: showDistance"></span><span data-bind="visible: showDistance"> miles</span></p>
+<p><span>Price: </span><span data-bind="visible: showPrice">$</span><span data-bind="text: price,
+                                         value: price,
+                                         visible: showPrice"></span></p>
+
+<hr />
+<!--BILLING INFO-->
+<h2>Billing and Contact Information</h2>
+<table>
+    <tr>
+        <td>First Name:</td>
+        <td>
+            <input type="text" data-bind="value: firstName" />
+        </td>
+    </tr>
+    <tr>
+        <td>Last Name:
+        </td>
+        <td>
+            <input type="text" data-bind="value: lastName"/>
+        </td>
+    </tr>
+    
+    <tr>
+    <td>Country:</td>
+    <td>
+        <select data-bind="options: sortedCountries,
+                                optionsText: 'countryName',
+                                optionsValue: 'countryName',
+                                value: billCountry,
+                                optionsCaption: 'Choose one...'"></select>
+    </td>
+</tr>
+    <tr><td>Address:</td><td> <input type="text" data-bind="value: address"/></td></tr>
+    <tr><td>City:</td><td> <input type="text" data-bind="value: billCity"/></td></tr>
+    <tr><td>State:</td><td><select data-bind="options: billFilteredStates,
+                                optionsText: 'stateName',
+                                optionsValue: 'stateName',
+                                value: billState,
+                                optionsCaption: 'Choose one...'"></select>
+        <span class="optional">&nbsp;&nbsp;* US only</span></td></tr>
+    
+    <tr><td>Zip:</td><td> <input type="text" data-bind="value: zip"/></td></tr>
+    <tr><td>Phone:</td><td><input type="text" data-bind="value: phone"/></td></tr>
+</table>
+<p ></p>
+<!--ERROR SECTION-->
+<p id="errorP"></p>
+<!--BUTTON-->
+<button id="saveButton" onclick="saveFlight()">Buy Ticket</button>
+
+
+<!--turn 'Model' into JSON data-->
+<script type="text/javascript">
+    var model = @Html.Raw(Json.Encode(Model));
+</script>
+<!--scirpts-->
+<script src="~/Scripts/jquery-3.2.1.min.js"></script>
+<script src="~/Scripts/knockout-3.4.2.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/index.js"></script>
+<!--script for button-->
+<script type="text/javascript">
+    function saveFlight()
+    {
+        var result = CheckRequiredFields();
+        if (result == true)
+        {
+            function myState()
+            {
+                if (ViewModel.billState() == "Choose one..." || ViewModel.billState() == null || ViewModel.billState() == "")
+                {
+                    return "";
+                }
+                else if (ViewModel.billCountry() == "United States")
+                {
+                    return ViewModel.billState();
+                }
+                else
+                {
+                    return "";
+                }
+            }
+
+            function myCurrentState()
+            {
+                if (ViewModel.selectedState() == "Choose one..." || ViewModel.selectedState() == null || ViewModel.selectedState() == "")
+                {
+                    return "";
+                }
+                else if (ViewModel.selectedCountry() == "United States")
+                {
+                    return ViewModel.selectedState();
+                }
+                else
+                {
+                    return "";
+                }
+            }
+
+            function myDestState()
+            {
+                if (ViewModel.selectedState2() == "Choose one..." || ViewModel.selectedState2() == null || ViewModel.selectedState2() == "")
+                {
+                    return "";
+                }
+                else if (ViewModel.selectedCountry2() == "United States")
+                {
+                    return ViewModel.selectedState2();
+                }
+                else
+                {
+                    return "";
+                }
+            }
+
+            //data to pass to controller
+            $.ajax({
+                url: '@Url.Action("Save", "Home")',
+                type: 'POST',
+                data: JSON.stringify
+                    ({
+                        "FirstName": ViewModel.firstName(),
+                        "LastName": ViewModel.lastName(),
+                        "Address": ViewModel.address(),
+                        "City": ViewModel.billCity(),
+                        "Country": ViewModel.billCountry(),
+                        "Zip": ViewModel.zip(),
+                        "Phone": ViewModel.phone(),
+                        "CurrentCountry": ViewModel.selectedCountry(),
+                        "CurrentCity": ViewModel.selectedCity(),
+                        "CurrentAirport": ViewModel.selectedAirport(),
+                        "DestinationCountry": ViewModel.selectedCountry2(),
+                        "DestinationCity": ViewModel.selectedCity2(),
+                        "DestinationAirport": ViewModel.selectedAirport2(),
+                        "Distance": ViewModel.distance(),
+                        "Cost": ViewModel.price(),
+                        "State": myState(),
+                        "CurrentState": myCurrentState(),
+                        "DestinationState": myDestState()
+                    }),
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (result)
+                {
+                    location.href = '@Url.Action("Success", "Home")'
+                }
+            });
+            
+        }
+        else
+        {
+            document.getElementById("errorP").innerHTML = printError();
+        }
+    }
+</script>
+
+
+
+

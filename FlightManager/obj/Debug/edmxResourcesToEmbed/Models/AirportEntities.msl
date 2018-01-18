@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="AirportManagerModelStoreContainer" CdmEntityContainer="AirportManagerEntities">
+    <EntitySetMapping Name="Airports">
+      <EntityTypeMapping TypeName="AirportManagerModel.Airport">
+        <MappingFragment StoreEntitySet="Airports">
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Country" ColumnName="Country" />
+          <ScalarProperty Name="iata_code" ColumnName="iata_code" />
+          <ScalarProperty Name="icao_code" ColumnName="icao_code" />
+          <ScalarProperty Name="latitude_deg" ColumnName="latitude_deg" />
+          <ScalarProperty Name="longitude_deg" ColumnName="longitude_deg" />
+          <ScalarProperty Name="elevation_ft" ColumnName="elevation_ft" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Customers">
+      <EntityTypeMapping TypeName="AirportManagerModel.Customer">
+        <MappingFragment StoreEntitySet="Customers">
+          <ScalarProperty Name="DestinationAirport" ColumnName="DestinationAirport" />
+          <ScalarProperty Name="CurrentAirport" ColumnName="CurrentAirport" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="Country" ColumnName="Country" />
+          <ScalarProperty Name="Zip" ColumnName="Zip" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="CurrentCity" ColumnName="CurrentCity" />
+          <ScalarProperty Name="CurrentState" ColumnName="CurrentState" />
+          <ScalarProperty Name="CurrentCountry" ColumnName="CurrentCountry" />
+          <ScalarProperty Name="DestinationCity" ColumnName="DestinationCity" />
+          <ScalarProperty Name="DestinationState" ColumnName="DestinationState" />
+          <ScalarProperty Name="DestinationCountry" ColumnName="DestinationCountry" />
+          <ScalarProperty Name="Distance" ColumnName="Distance" />
+          <ScalarProperty Name="Cost" ColumnName="Cost" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

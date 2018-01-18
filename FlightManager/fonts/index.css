@@ -1,0 +1,40 @@
+﻿.optional{
+    color: #ee8383;
+}
+
+td{
+    padding-left: 25px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+select{
+    width: 275px;
+}
+
+input{
+    width: 275px;
+}
+
+.toTable{
+    margin-bottom: 25px;
+}
+
+#saveButton{
+    height: 50px;
+    width: 100px;
+    margin-left: 200px;
+    margin-top: 20px;
+    background-color: #1012ea;
+    color: white;
+}
+
+#saveButton:hover{
+    background-color: aqua;
+    color: black;
+}
+
+#errorP{
+    color: red;
+    font: 14px;
+}

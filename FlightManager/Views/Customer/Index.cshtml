@@ -1,0 +1,79 @@
+﻿@model List<FlightManager.Models.Customer>
+@{
+    ViewBag.Title = "Customer";
+}
+<link href="~/fonts/customer.css" rel="stylesheet" />
+<h3>List of Flights</h3>
+
+<table>
+    <thead>
+        <tr class="headtext">
+            <td>Name</td>
+            <td>Address</td>
+            <td>Country</td>
+            <td>City</td>
+            <td>State</td>
+            <td>Zip</td>
+            <td>Phone</td>
+            <td>Country From</td>
+            <td>City From</td>
+            <td>State From</td>
+            <td>Airport From</td>
+            <td>Country To</td>
+            <td>City To</td>
+            <td>State To</td>
+            <td>Airport To</td>
+            <td>Distance</td>
+            <td>Price</td>
+        </tr>
+    </thead>
+    @{ 
+        System.Text.StringBuilder sb = new System.Text.StringBuilder();
+
+        foreach (var customer in Model)
+        {
+            sb.Append("<tr>\n");
+            sb.Append("<td>" + customer.FirstName + " " + customer.LastName + "</td>");
+            sb.Append("<td>"+customer.Address+"</td>");
+            sb.Append("<td>"+customer.Country+"</td>");
+            sb.Append("<td>"+customer.City+"</td>");
+            if ((customer.State != "" || customer.State != null) && customer.Country == "United States")
+            {
+                sb.Append("<td>"+customer.State+"</td>");
+            }
+            else
+            {
+                sb.Append("<td>"+""+"</td>");
+            }
+            sb.Append("<td>"+customer.Zip+"</td>");
+            sb.Append("<td>"+customer.Phone+"</td>");
+            sb.Append("<td>"+customer.CurrentCountry+"</td>");
+            sb.Append("<td>"+customer.CurrentCity+"</td>");
+            if ((customer.CurrentState != "" || customer.CurrentState != null) && customer.CurrentCountry == "United States")
+            {
+                sb.Append("<td>" + customer.CurrentState + "</td>");
+            }
+            else
+            {
+                sb.Append("<td>" + "" + "</td>");
+            }
+            sb.Append("<td>" + customer.CurrentAirport + "</td>");
+            sb.Append("<td>" + customer.DestinationCountry +"</td>");
+            sb.Append("<td>" + customer.DestinationCity +"</td>");
+            if ((customer.DestinationState != "" || customer.DestinationState != null) && customer.DestinationCountry == "United States")
+            {
+                sb.Append("<td>" + customer.DestinationState + "</td>");
+            }
+            else
+            {
+                sb.Append("<td>" + "" + "</td>");
+            }
+            sb.Append("<td>" + customer.DestinationAirport +"</td>");
+            sb.Append("<td>" + customer.Distance + " miles </td>");
+            sb.Append("<td>" + string.Format("${0:0.00}", customer.Cost) +"</td>");
+            sb.Append("</tr>");
+        }
+
+    }
+    @Html.Raw(sb.ToString())
+</table>
